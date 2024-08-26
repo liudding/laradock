@@ -12,9 +12,11 @@
 # Note: Base Image name format {image-tag}-{php-version}
 #
 
+ARG DOCKER_REGISTRY
+ARG DOCKER_REGISTRY_NAMESPACE
 ARG LARADOCK_PHP_VERSION
 ARG BASE_IMAGE_TAG_PREFIX=latest
-FROM laradock/workspace:${BASE_IMAGE_TAG_PREFIX}-${LARADOCK_PHP_VERSION}
+FROM ${DOCKER_REGISTRY}/${DOCKER_REGISTRY_NAMESPACE}/workspace:${BASE_IMAGE_TAG_PREFIX}-${LARADOCK_PHP_VERSION}
 
 LABEL maintainer="Mahmoud Zalt <mahmoud@zalt.me>"
 
@@ -50,7 +52,7 @@ ENV PGID ${PGID}
 # always run apt update when start and after add new source list, then clean up at end.
 RUN set -xe; \
     apt-get update -yqq && \
-    pecl channel-update pecl.php.net && \
+    pecl channel-update https://pecl.php.net/channel.xml && \
     groupadd -g ${PGID} laradock && \
     useradd -l -u ${PUID} -g laradock -m laradock -G docker_env && \
     usermod -p "*" laradock -s /bin/bash && \
