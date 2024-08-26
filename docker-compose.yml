@@ -347,6 +347,8 @@ services:
       build:
         context: ./php-worker
         args:
+          - DOCKER_REGISTRY=${DOCKER_REGISTRY}
+          - DOCKER_REGISTRY_NAMESPACE=${DOCKER_REGISTRY_NAMESPACE}
           - CHANGE_SOURCE=${CHANGE_SOURCE}
           - LARADOCK_PHP_VERSION=${PHP_VERSION}
           - PHALCON_VERSION=${PHALCON_VERSION}

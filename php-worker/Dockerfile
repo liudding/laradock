@@ -4,8 +4,10 @@
 #--------------------------------------------------------------------------
 #
 
+ARG DOCKER_REGISTRY
+ARG DOCKER_REGISTRY_NAMESPACE
 ARG LARADOCK_PHP_VERSION
-FROM php:${LARADOCK_PHP_VERSION}-alpine
+FROM ${DOCKER_REGISTRY}/${DOCKER_REGISTRY_NAMESPACE}/php:${LARADOCK_PHP_VERSION}-alpine
 
 LABEL maintainer="Mahmoud Zalt <mahmoud@zalt.me>"
 
