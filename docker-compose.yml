@@ -606,6 +606,28 @@ services:
         - "${MYSQL_PORT}:3306"
       networks:
         - backend
+### mysql-backup backup mysql ###########################################
+    mysqlbackup:
+      image: registry.cn-shanghai.aliyuncs.com/linkstar/mysql-backup
+      restart: always
+      volumes:
+        - ${BACKUP_PATH_HOST}/mysql:/db
+      environment:
+        - DB_SERVER=${MYSQLBACKUP_DB_SERVER}
+        - DB_PORT=${MYSQLBACKUP_DB_PORT}
+        - DB_USER=${MYSQLBACKUP_DB_USER}
+        - DB_PASSWORD=${MYSQLBACKUP_DB_PASSWORD}
+        - DB_NAMES=${MYSQLBACKUP_DB_NAMES}
+        - DB_DUMP_TARGET=${MYSQLBACKUP_DB_DUMP_TARGET}
+        - AWS_ACCESS_KEY_ID=${MYSQLBACKUP_AWS_ACCESS_KEY_ID}
+        - AWS_SECRET_ACCESS_KEY=${MYSQLBACKUP_AWS_SECRET_ACCESS_KEY}
+        - AWS_DEFAULT_REGION=${MYSQLBACKUP_AWS_DEFAULT_REGION}
+        - AWS_ENDPOINT_URL=${MYSQLBACKUP_AWS_ENDPOINT_URL}
+        - DB_DUMP_FREQ=${MYSQLBACKUP_DB_DUMP_FREQ}
+        - DB_DUMP_BEGIN=${MYSQLBACKUP_DB_DUMP_BEGIN}
+        - DB_DUMP_CRON=${MYSQLBACKUP_DB_DUMP_CRON}
+      networks:
+        - backend
 
 ### Percona ################################################
     percona:
