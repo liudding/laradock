@@ -608,7 +608,7 @@ services:
         - backend
 ### mysql-backup backup mysql ###########################################
     mysqlbackup:
-      image: registry.cn-shanghai.aliyuncs.com/linkstar/mysql-backup
+      image: registry-vpc.cn-shanghai.aliyuncs.com/linkstar/mysql-backup
       restart: always
       volumes:
         - ${BACKUP_PATH_HOST}/mysql:/db
@@ -616,7 +616,7 @@ services:
         - DB_SERVER=${MYSQLBACKUP_DB_SERVER}
         - DB_PORT=${MYSQLBACKUP_DB_PORT}
         - DB_USER=${MYSQLBACKUP_DB_USER}
-        - DB_PASSWORD=${MYSQLBACKUP_DB_PASSWORD}
+        - DB_PASS=${MYSQLBACKUP_DB_PASSWORD}
         - DB_NAMES=${MYSQLBACKUP_DB_NAMES}
         - DB_DUMP_TARGET=${MYSQLBACKUP_DB_DUMP_TARGET}
         - AWS_ACCESS_KEY_ID=${MYSQLBACKUP_AWS_ACCESS_KEY_ID}
@@ -1138,7 +1138,7 @@ services:
 
 ### MeiliSearch ##########################################
     meilisearch:
-      image: getmeili/meilisearch:latest
+      image: registry-vpc.cn-shanghai.aliyuncs.com/linkstar/meilisearch:latest
       volumes:
         - ${DATA_PATH_HOST}/meilisearch:/data.ms
       ports:
